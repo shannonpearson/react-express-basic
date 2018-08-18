@@ -31,7 +31,7 @@ export default {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: ['transform-inline-environment-variables'],
+            plugins: ['transform-inline-environment-variables'], // this may not be necessary
           },
         },
         exclude: /node_modules/,

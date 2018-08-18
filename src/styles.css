@@ -1,5 +1,5 @@
-body {
-  background: green;
+/* body {
+  background: '#ff3dc1';
 }
 
 .globalClass {
@@ -9,3 +9,4 @@ body {
 :local(.localClass) {
   color: red;
 }
+ */
