@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node ./server/index.js",
+    "dev": "nodemon --exec babel-node ./server/index.js",
     "lint": "eslint . --ext .js,.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
