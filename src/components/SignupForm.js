@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class SignupForm extends Component {
   // constructor(props) {
@@ -6,7 +7,10 @@ class SignupForm extends Component {
   // }
 
   handleSubmit = () => {
-
+    console.log('submit');
+    axios.post('/signup')
+      .then((response) => { console.log('success', response); })
+      .catch((err) => { console.log('error', err); });
   }
 
   render() {
@@ -19,8 +23,8 @@ class SignupForm extends Component {
           Password:
           <input type="text" name="password" />
           <br />
-          <input type="submit" value="Submit" />
         </form>
+        <button type="button" onClick={this.handleSubmit}> Submit </button>
       </div>
     );
   }

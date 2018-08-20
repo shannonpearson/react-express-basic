@@ -42,6 +42,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // use routes
 app.use('/', routes);
 
+app.get('*', (req, res) => {
+  res.status(200).send({
+    message: 'Welcome to the beginning of nothingness',
+  });
+});
+
 // error handlers
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
