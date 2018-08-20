@@ -15,7 +15,7 @@ class SignupForm extends Component {
   }
 
   handleSubmit = (event) => {
-    axios.post('/signup', { username: this.state.username, password: this.state.password })
+    axios.post('/signup', { authRequestType: 'signup', username: this.state.username, password: this.state.password })
       .then((response) => { console.log('success', response); })
       .catch((err) => { console.log('error', err); });
     event.preventDefault();
@@ -24,6 +24,7 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
+        <h1> Sign up! </h1>
         <form onSubmit={this.handleSubmit}>
           Username:
           <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
