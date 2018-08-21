@@ -55,4 +55,5 @@ export default {
     ],
   },
   target: 'web',
+  mode: 'development',
 };
