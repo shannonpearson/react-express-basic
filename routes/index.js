@@ -6,34 +6,31 @@ require('../server/config/passport');
 
 const router = express.Router();
 
-/* GET home page */
-router.post('/signup', userController.authenticate);
+/* Create new user */
+router.post('/signup', userController.create);
 
-const next = () => { console.log('NEXT!' )};
-
-// router.post('/login', userController.authenticate);
+/* Login using passport */
 router.post('/login', (req, res, next) => {
   const { body: { username, password }} = req;
-
+  
   if (!username) {
     return res.status(401).send({ message: 'Username is required, none sent.' });
   }
   if (!password) {
     return res.status(401).send({ message: 'Password is required, none sent.' });
   }
-
+  
   return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
     if (err) {
-      console.log('passport error')
-      res.status(401).send({ message: `Authentication error. ${err}`});
+      res.status(401).send({ message: `Passport authentication error. ${err}`});
     }
     if (passportUser) {
-      console.log('logged in!')
-      res.status(201).send({ user: passportUser });
+      res.status(201).send({ message: 'Logged in via passport!', user: passportUser });
     }
   })(req, res, next);
 });
 
+/* GET home page */
 router.get('*', (req, res) => {
   console.log('heyo');
   res.render('index');
