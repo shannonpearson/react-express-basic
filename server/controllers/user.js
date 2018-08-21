@@ -1,6 +1,27 @@
 import bcrypt from 'bcrypt';
+// import passport from 'passport';
+// import { Strategy as LocalStrategy } from 'passport-local';
 
 const { User } = require('../models');
+
+// passport.use(new LocalStrategy(
+//   (username, password, done) => {
+//     User.findOne({ username }, (err, user) => {
+//       if (err) {
+//         return done(err);
+//       }
+//       if (!user) {
+//         return done(null, false, { message: 'Username not found.' });
+//       }
+//       if (!user.validPassword(password)) {
+//         return done(null, false, { message: 'Password is incorrect. '});
+//       }
+//       return done(null, user);
+//     });
+//   },
+// ));
+
+// stuff below here works
 
 const authenticate = (req, res) => User
   // search for user in database

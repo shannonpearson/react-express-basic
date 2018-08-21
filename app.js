@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
 
 import webpackDevServer from './webpack/dev-server';
 import routes from './routes';
@@ -26,6 +27,10 @@ if (process.env.NODE_ENV !== 'production') {
   webpackDevServer(app);
 }
 
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // logger
 app.use(logger('combined'));
 
@@ -35,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // cookie parser
 app.use(cookieParser());
+
 
 // serve static files from 'public'
 app.use(express.static(path.join(__dirname, 'public')));
