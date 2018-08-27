@@ -20,7 +20,11 @@ const app = express();
 
 // view engine
 app.set('views', path.join(__dirname, './views'));
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug');
+app.engine('html', require('ejs').renderFile);
+
+app.set('view engine', 'html');
+
 
 // include webpack-dev-server for development only
 if (process.env.NODE_ENV !== 'production') {
@@ -30,6 +34,15 @@ if (process.env.NODE_ENV !== 'production') {
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
 
 // logger
 app.use(logger('combined'));
@@ -55,13 +68,13 @@ app.use('/', routes);
 // });
 
 // error handlers
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: app.get('env') === 'development' ? err : {},
-  });
-  next();
-});
+// app.use((err, req, res, next) => {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: app.get('env') === 'development' ? err : {},
+//   });
+//   next();
+// });
 
 export default app;

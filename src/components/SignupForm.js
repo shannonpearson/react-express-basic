@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 /* eslint-disable */
 class SignupForm extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class SignupForm extends Component {
   }
 
   handleSubmit = (event) => {
-    axios.post('/signup', { authRequestType: 'signup', username: this.state.username, password: this.state.password })
-      .then((response) => { console.log('success', response); })
+    axios.post('/auth/signup/local', { username: this.state.username, password: this.state.password })
+      .then((response) => { console.log('success', response);})
       .catch((err) => { console.log('error', err); });
     event.preventDefault();
   }

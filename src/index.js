@@ -1,23 +1,18 @@
 /*eslint-disable*/
 import React from 'react';
 import { render } from 'react-dom';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
+import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import Reducer from '../src/reducers/Reducer';
+import Root from './components/Router';
 
 if (module.hot) {
   module.hot.accept();
 }
 
-const App = () => {
-  return (
-    <div>
-      <h1> boi </h1>
-      <h2> wat </h2>
-      <SignupForm />
-      <LoginForm />
-    </div>
-  );
-};
-
+const store = createStore(Reducer);
 // render the app
-render(<App />, document.getElementById('app'));
+render(
+  <Root store={store} />,
+  document.getElementById('root')
+);

@@ -15,7 +15,7 @@ class LoginForm extends Component {
   }
 
   handleSubmit = (event) => {
-    axios.post('/login', { authRequestType: 'login', username: this.state.username, password: this.state.password })
+    axios.post('/auth/login/local', { username: this.state.username, password: this.state.password })
       .then((response) => { console.log('success', response); })
       .catch((err) => { console.log('error', err); });
     event.preventDefault();
