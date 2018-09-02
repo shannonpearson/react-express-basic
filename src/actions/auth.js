@@ -1,20 +1,25 @@
-// import axios from 'axios';
-// import { SIGNUP, LOGIN } from './actionTypes';
+import axios from 'axios';
+import { LOCAL_AUTH } from './actionTypes';
 
-// const signup = (strategy = 'local', credentials = {}) => {
-//   console.log('*signup action*')
-//   return dispatch => axios.post('/auth/signup', { strategy, credentials })
-//     .then(res => dispatch({
-//       type: SIGNUP,
-//       payload: res,
-//     }));
-// };
+const localAuth = (credentials = {}) => {
+  console.log('*local signup action*', credentials);
+  return (dispatch) => {
+    console.log('dispatch');
+    axios.get('/auth/success').then(() => { console.log('finished auth get'); })
+      .then(() => {
+        axios.post('/auth/local', { credentials })
+          .then((res) => {
+            console.log('action response', res);
+          });
+        dispatch({
+          type: LOCAL_AUTH,
+          payload: 'hi',
+        });
+      });
+  };
+  // });
+};
 
-// const login = () => {
-
-// };
-
-// module.exports = {
-//   signup,
-//   login,
-// };
+module.exports = {
+  localAuth,
+};

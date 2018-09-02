@@ -31,13 +31,14 @@ function(accessToken, refreshToken, profile, cb) {
 }
 ));
 
-router.post('/auth/signup/local', 
-  passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/', failureFlash: false }),
+router.post('/auth/local', () => {
+  console.log('local post')
+  passport.authenticate('local', { successRedirect: '/auth/success', failureRedirect: '/auth/failure', failureFlash: false }),
   (req, res) => {
     console.log('callback', res.body);
     res.sendStatus(200);
   }
-);
+});
 
 
 router.get('/login/facebook', (req, res) => {
@@ -86,19 +87,19 @@ router.get('/auth/spotify',(req,res,next) => {
 
 /* Spotify login callback */
 router.get('/auth/spotify/callback', (req, res,next) => {
-  passport.authenticate('spotify', {failureRedirect: '/spotify/failure', successRedirect: '/auth/spotify/success'}
+  passport.authenticate('spotify', {failureRedirect: '/auth/failure', successRedirect: '/auth/success'}
   )(req,res,next)
 }
 );
 
-router.get('/auth/spotify/failure', (req, res) => {
-  console.log('** Spotify failed to login route **');
-  res.sendStatus(202);
+router.get('/auth/failure', (req, res) => {
+  console.log('** Failure login route **');
+  res.status(202).send({ message: 'auth failure'} );
 });
 
-router.get('/auth/spotify/success', (req, res) => {
-  console.log('** Spotify failed to login route **');
-  res.sendStatus(202);
+router.get('/auth/success', (req, res) => {
+  console.log('** Success login route **');
+  res.status(202).send({ message: 'auth success' });
 });
 
 router.get('/home', (req, res) => {

@@ -58,6 +58,7 @@ passport.use('local', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
 }, (username, password, done) => {
+  console.log('local strategy starting');
   // find user in database and create or log in
   User.findOne({ where: { username: username.toLowerCase() } })
     .then((user) => {

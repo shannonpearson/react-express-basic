@@ -1,12 +1,13 @@
-import { SIGNUP, LOGIN } from '../actions/actionTypes';
+import { LOCAL_AUTH } from '../actions/actionTypes';
 
 const initialState = {};
 
 export default (state = initialState, action) => {
+  console.log('A REDUCER IS HAPPENING');
   switch (action.type) {
-    case SIGNUP:
-    case LOGIN:
-      return action.user;
+    case LOCAL_AUTH:
+      console.log('REDUCING');
+      return { ...state, user: action.user };
     default:
       return state;
   }

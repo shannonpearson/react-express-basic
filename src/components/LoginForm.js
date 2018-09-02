@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
 /* eslint-disable */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { localAuth } from '../actions/auth';
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -10,14 +11,19 @@ class LoginForm extends Component {
     };
   }
 
+  componentDidUpdate() {
+    console.log('props', this.props)
+  }
+
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = (event) => {
-    axios.post('/auth/login/local', { username: this.state.username, password: this.state.password })
-      .then((response) => { console.log('success', response); })
-      .catch((err) => { console.log('error', err); });
+    event.preventDefault();
+    console.log('submitting')
+    const result = this.props.localAuth({ username: this.state.username, password: this.state.password});
+    console.log('result', result);
     event.preventDefault();
   }
 
@@ -40,4 +46,14 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+const mapStateToProps = (state) => (
+  {...state}
+);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    localAuth: () => dispatch(localAuth()),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

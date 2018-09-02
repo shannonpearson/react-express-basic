@@ -1,7 +1,5 @@
-const SIGNUP = 'SIGNUP';
-const LOGIN = 'LOGIN';
+const LOCAL_AUTH = 'LOCAL_AUTH';
 
 module.exports = {
-  SIGNUP,
-  LOGIN,
+  LOCAL_AUTH,
 };
