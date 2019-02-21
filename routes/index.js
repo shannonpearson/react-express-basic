@@ -109,7 +109,7 @@ router.get('/home', (req, res) => {
 
 /* GET home page */
 router.get('*', (req, res) => {
-  console.log('heyo');
+  console.log('heyo, uncaught get');
   res.render('index.html');
 });
 

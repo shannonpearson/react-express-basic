@@ -11,10 +11,6 @@ class LoginForm extends Component {
     };
   }
 
-  componentDidUpdate() {
-    console.log('props', this.props)
-  }
-
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
